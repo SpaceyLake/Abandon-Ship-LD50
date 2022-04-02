@@ -1,5 +1,10 @@
 extends KinematicBody2D
 
+signal health_changed(health)
+signal max_health_changed(max_health)
+
+const _max_health = 10
+var _health = 10
 var _input : Vector2 = Vector2.ZERO
 var _velocity : Vector2 = Vector2.ZERO
 export var _velocity_decrease = 0.85
@@ -11,6 +16,10 @@ onready var _current_weapon
 
 func _ready():
 	Global._player = self
+	connect("max_health_changed", Global._UI, "_update_max_health")
+	connect("health_changed", Global._UI, "_update_healthbar")
+	emit_signal("max_health_changed", _max_health)
+	emit_signal("health_changed", _health)
 	_current_weapon = Global.instance_node(weapon, $WeaponHoldPoint.global_position, self)
 	pass
 
@@ -39,5 +48,7 @@ func _physics_process(delta):
 func _exit_tree():
 	Global._player = null
 
-func _attacked(_body):
-	modulate = Color.green
+func _attacked(_body, damage):
+	_health -= damage
+	emit_signal("health_changed", _health)
+	if _health <= 0: get_tree().reload_current_scene()
