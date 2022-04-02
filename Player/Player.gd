@@ -48,8 +48,8 @@ func _physics_process(delta):
 func _exit_tree():
 	Global._player = null
 
-func _attacked(_body, damage, _knockback, enemy_position):
-	print(enemy_position)
+func _attacked(damage, _knockback):
+	_velocity += _knockback
 	_health -= damage
 	emit_signal("health_changed", _health)
 	if _health <= 0: get_tree().reload_current_scene()
