@@ -19,6 +19,8 @@ one_shot = true
 [node name="EvacuationTimer" type="Timer" parent="."]
 one_shot = true
 
+[node name="OxygenRegenTimer" type="Timer" parent="."]
+
 [node name="UI" parent="." instance=ExtResource( 7 )]
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
@@ -54,3 +56,15 @@ _door_path = NodePath("../HDoor2")
 
 [node name="HazardSpawner" parent="." instance=ExtResource( 2 )]
 position = Vector2( 40, 40 )
+
+[node name="ControlPanel2" parent="." instance=ExtResource( 9 )]
+position = Vector2( 152, 184 )
+_door_path = NodePath("../HDoor")
+
+[node name="ControlPanel3" parent="." instance=ExtResource( 9 )]
+position = Vector2( 152, 104 )
+_door_path = NodePath("../HDoor2")
+
+[node name="ControlPanel4" parent="." instance=ExtResource( 9 )]
+position = Vector2( 152, 152 )
+_door_path = NodePath("../HDoor")

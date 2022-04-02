@@ -8,6 +8,7 @@ export var _health : int = 5
 export var _minimum_target : Vector2 = Vector2.ONE * 16
 export var _target_offset : Vector2 = Vector2.ONE * 16
 export var _max_spawned : int = 8
+export var _hullbreach : PackedScene
 var _enemies_spawned : int = 0
 onready var _spawn_timer : Timer = $SpawnTimer
 onready var _hull_damage_timer : Timer = $HullDamageTimer
@@ -40,7 +41,8 @@ func _bullet_hit(damage, _knockback, _bullet_velocity, bullet_origin):
 	_influence(bullet_origin)
 	_health -= damage
 	if _health <= 0:
-		_spawner._hazard_fixed()
+		var breach = Global.instance_node(_hullbreach, global_position, Global._node_creation_parent)
+		breach._set_spawner(_spawner)
 		queue_free()
 
 func _influence(target_position):
