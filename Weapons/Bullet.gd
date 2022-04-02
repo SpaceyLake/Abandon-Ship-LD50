@@ -3,7 +3,7 @@ extends Area2D
 var _velocity : Vector2 = Vector2.ZERO
 var _direction : Vector2 = Vector2.ZERO
 export var _speed : float = 100
-export var _knockback : float = 2
+export var _knockback : float = 100
 export var _damage : float = 1
 var _spawn_position : Vector2 = Vector2.ZERO
 
