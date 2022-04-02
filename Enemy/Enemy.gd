@@ -4,17 +4,22 @@ export var _velocity : Vector2 = Vector2.ZERO
 var _input : Vector2 = Vector2.ZERO
 export var _velocity_decrease : float = 0.85
 export var _movement_speed : float = 300
-export var _attack_distance : float = 18
+export var _attack_distance : float = 6
 export var _minimum_velocity : float = 0.01
 export var _health : int = 5
+export var _damage : int = 1
+export var _knockback = 100
 var _known_player_position : Vector2 = Vector2.ZERO
 onready var _vision : RayCast2D = $Vision
-onready var _attack_area : Area2D = $Vision/AttackArea
+onready var _attack_area : Area2D = $AttackArea
+
 
 var _is_attacking : bool = false
 
 func _ready():
-	_attack_area.connect("body_entered", Global._player, "_attacked")
+	add_to_group("Enemy", true)
+	_attack_area.connect("body_entered", Global._player, "_attacked", [_damage, _knockback, position])
+	_known_player_position = position
 
 func _physics_process(delta):
 	#_vision.transform.
@@ -27,7 +32,10 @@ func _physics_process(delta):
 			$Vision/Icon.modulate = Color.green
 		else:
 			$Vision/Icon.modulate = Color.blue
-		_input = (_known_player_position - transform.origin).normalized()
+		if global_position.distance_to(_known_player_position) > 4:
+			_input = (_known_player_position - global_position).normalized()
+		else:
+			_input = Vector2.ZERO
 		_velocity += _input * _movement_speed * delta
 	
 	_velocity *= _velocity_decrease
@@ -44,9 +52,14 @@ func _physics_process(delta):
 			if _input.x != 0:
 				$Sprite.flip_h = _input.x < 0
 
-func _bullet_hit(damage, knockback, hitpoint):
+func _bullet_hit(damage, knockback, bullet_velocity, _bullet_origin):
+	_known_player_position = _bullet_origin
 	_health -= damage
-	_velocity += transform.origin - hitpoint * knockback
+	_velocity += bullet_velocity * knockback
+	print(_velocity)
+	if _health <= 0:
+		queue_free()
+		_attack_area.disconnect("body_entered", Global._player, "_attacked")
 
 func _attack_start():
 	_is_attacking = true
@@ -60,4 +73,3 @@ func _attack_end_trigger():
 
 func _attack_finished():
 	_is_attacking = false
-	_attack_area.monitoring = false
