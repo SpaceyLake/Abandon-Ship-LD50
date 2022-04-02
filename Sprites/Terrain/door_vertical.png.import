@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/seven_segment.png-71c050e2185b48c025b5349117192315.stex"
+path="res://.import/door_vertical.png-390620c98a6051f03006a772d3befe25.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/Gui/seven_segment.png"
-dest_files=[ "res://.import/seven_segment.png-71c050e2185b48c025b5349117192315.stex" ]
+source_file="res://Sprites/Terrain/door_vertical.png"
+dest_files=[ "res://.import/door_vertical.png-390620c98a6051f03006a772d3befe25.stex" ]
 
 [params]
 
