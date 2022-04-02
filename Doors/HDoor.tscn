@@ -64,7 +64,7 @@ tracks/1/keys = {
 z_index = -2
 script = ExtResource( 2 )
 
-[node name="DoorLeft" type="KinematicBody2D" parent="."]
+[node name="DoorLeft" type="StaticBody2D" parent="."]
 collision_mask = 0
 
 [node name="Sprite" type="Sprite" parent="DoorLeft"]
@@ -76,7 +76,7 @@ centered = false
 position = Vector2( 8, 8.5 )
 shape = SubResource( 1 )
 
-[node name="DoorRight" type="KinematicBody2D" parent="."]
+[node name="DoorRight" type="StaticBody2D" parent="."]
 position = Vector2( 16, 0 )
 collision_mask = 0
 
