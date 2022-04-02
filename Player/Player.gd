@@ -6,6 +6,7 @@ export var _movement_speed : int = 100
 export var _minimum_velocity : float = 0.01
 
 func _ready():
+	Global._player = self
 	pass
 
 func _physics_process(delta):
@@ -15,3 +16,6 @@ func _physics_process(delta):
 	if abs(_velocity.x) < _minimum_velocity: _velocity = Vector2(0, _velocity.y)
 	if abs(_velocity.y) < _minimum_velocity: _velocity = Vector2(_velocity.x, 0)
 	_velocity = move_and_slide(_velocity, Vector2.ZERO, false)
+
+func _exit_tree():
+	Global._player = null
