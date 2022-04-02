@@ -4,10 +4,16 @@ export var _max_hull_integrity : int = 100
 export var _max_oxygen_level : int = 100
 export var _total_crew : int = 100
 export var _evacuation_time : float = 2
+export var _hazard_spawn_time : float = 10
+export var _hazard_time_offset : float = 5
 var _hull_integrity : int
 var _oxygen_level : int
 var _evacuated_crew : int
 onready var _evacuation_timer : Timer = $EvacuationTimer
+onready var _hazard_timer : Timer = $HazardTimer
+var _possible_hazards : Array = []
+var _active_hazards : Array = []
+var rng = RandomNumberGenerator.new()
 
 func _ready():
 	Global._node_creation_parent = self
@@ -22,6 +28,25 @@ func _ready():
 	Global._UI._set_evacuated_crew(_evacuated_crew)
 	_evacuation_timer.connect("timeout", self, "_evacuate")
 	_evacuation_timer.start(_evacuation_time)
+	_hazard_timer.connect("timeout", self, "_spawn_hazard")
+	var children = get_children()
+	for child in children:
+		if child.is_in_group("Hazard"):
+			_possible_hazards.append(child)
+			child.connect("_hazard_fixed", self, "_hazard_fixed", [child])
+	_possible_hazards.shuffle()
+	_hazard_timer.start(_hazard_spawn_time + rng.randf_range(0, _hazard_time_offset))
+
+func _spawn_hazard():
+	if _possible_hazards.size() > 0:
+		_possible_hazards.pop_front()._spawn_hazard()
+		_hazard_timer.start(_hazard_spawn_time + rng.randf_range(0, _hazard_time_offset))
+
+func _hazard_fixed(hazard):
+	if _possible_hazards.size() == 0:
+		_hazard_timer.start(_hazard_spawn_time + rng.randf_range(0, _hazard_time_offset))
+	_possible_hazards.append(hazard)
+	_possible_hazards.shuffle()
 
 func _damage_hull():
 	_hull_integrity -= 1

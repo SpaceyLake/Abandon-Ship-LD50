@@ -14,6 +14,7 @@ export var _knockback = 100
 var _target_position : Vector2 = Vector2.ZERO
 onready var _vision : RayCast2D = $Vision
 onready var _attack_area : Area2D = $AttackArea
+onready var _influence_area : Area2D = $InfluenceArea
 
 var _is_attacking : bool = false
 
@@ -58,12 +59,19 @@ func _physics_process(delta):
 
 func _bullet_hit(damage, knockback, bullet_velocity, _bullet_origin):
 	_target_position = _bullet_origin
+	_influence()
 	_health -= damage
 	_velocity += bullet_velocity * knockback
 	print(_velocity)
 	if _health <= 0:
 		emit_signal("_enemy_killed")
 		queue_free()
+
+func _influence():
+	var bodies = _influence_area.get_overlapping_bodies()
+	for body in bodies:
+		if body.is_in_group("Enemy"):
+			body._set_target_position(_target_position)
 
 func _attack_start():
 	_is_attacking = true

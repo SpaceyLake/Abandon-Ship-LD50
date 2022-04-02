@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://HazardSpawner/HazardSpawner.gd" type="Script" id=1]
+[ext_resource path="res://Enemy/EnemySpawner.tscn" type="PackedScene" id=2]
+
+[node name="HazardSpawner" type="Node2D"]
+script = ExtResource( 1 )
+hazards = [ ExtResource( 2 ) ]
