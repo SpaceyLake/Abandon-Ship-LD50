@@ -14,6 +14,7 @@ func _fire(direction : Vector2):
 	_velocity = direction * _speed
 	_direction = direction
 	_spawn_position = global_position
+	global_rotation = _direction.angle()
 
 func _physics_process(delta):
 	position += _velocity * delta

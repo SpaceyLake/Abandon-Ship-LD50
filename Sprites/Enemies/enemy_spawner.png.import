@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/enemy_slasher.png-57cfa661c28afcd2882aba5f0387f1fc.stex"
+path="res://.import/enemy_spawner.png-2d35bda67ad76c23e2f9d8c81a2a730b.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/Enemies/Slasher/enemy_slasher.png"
-dest_files=[ "res://.import/enemy_slasher.png-57cfa661c28afcd2882aba5f0387f1fc.stex" ]
+source_file="res://Sprites/Enemies/enemy_spawner.png"
+dest_files=[ "res://.import/enemy_spawner.png-2d35bda67ad76c23e2f9d8c81a2a730b.stex" ]
 
 [params]
 

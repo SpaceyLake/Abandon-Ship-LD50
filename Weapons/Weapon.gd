@@ -13,16 +13,19 @@ func _fire(direction : Vector2):
 
 func _set_animation(idle : bool, dir : Vector2):
 	if dir.y < 0:
+		$Mussle.position = Vector2(0, -12)
 		if idle:
 			$AnimationPlayer.play("Idle Up")
 		else:
 			$AnimationPlayer.play("Walk Up")
 	elif dir.y > 0:
+		$Mussle.position = Vector2(3, 11)
 		if idle:
 			$AnimationPlayer.play("Idle Down")
 		else:
 			$AnimationPlayer.play("Walk Down")
 	else:
+		$Mussle.position = Vector2(12, 0)
 		if idle:
 			$AnimationPlayer.play("Idle Side")
 		else:
