@@ -29,3 +29,6 @@ func _physics_process(delta):
 
 func _exit_tree():
 	Global._player = null
+
+func _attacked(_body):
+	modulate = Color.green
