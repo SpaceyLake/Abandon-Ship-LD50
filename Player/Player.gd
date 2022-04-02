@@ -12,7 +12,9 @@ export var _velocity_decrease = 0.85
 export var _movement_speed : int = 300
 export var _minimum_velocity : float = 0.01
 #export(Array, PackedScene) var weapons
-export var weapon : PackedScene
+export var _weapon : PackedScene
+export var _touch_length : float = 6
+onready var _touch : RayCast2D = $Touch
 onready var _current_weapon = null
 
 onready var _sprite_default = preload("res://Sprites/Player/player_walk.png")
@@ -24,7 +26,7 @@ func _ready():
 	connect("health_changed", Global._UI, "_update_healthbar")
 	emit_signal("max_health_changed", _max_health)
 	emit_signal("health_changed", _health)
-	_current_weapon = Global.instance_node(weapon, $WeaponHoldPoint.global_position, $WeaponHoldPoint)
+	_current_weapon = Global.instance_node(_weapon, $WeaponHoldPoint.global_position, $WeaponHoldPoint)
 	
 	if _current_weapon == null:
 		$Sprite.set_texture(_sprite_default)
@@ -34,6 +36,20 @@ func _ready():
 func _physics_process(delta):
 	_input = Vector2(Input.get_action_strength("move_right") - Input.get_action_strength("move_left"),
 						Input.get_action_strength("move_down") - Input.get_action_strength("move_up")).normalized()
+	if _input != Vector2.ZERO:
+		if abs(_input.x) > abs(_input.y):
+			if (_input.x > 0):
+				_touch.cast_to = Vector2.RIGHT * _touch_length
+			else:
+				_touch.cast_to = Vector2.LEFT * _touch_length
+		else:
+			if (_input.y < 0):
+				_touch.cast_to = Vector2.UP * _touch_length
+			else:
+				_touch.cast_to = Vector2.DOWN * _touch_length
+	if Input.is_action_just_pressed("interact"):
+		if _touch.get_collider() != null:
+			_touch.get_collider()._interact()
 	_velocity += _input * delta * _movement_speed
 	_velocity *= _velocity_decrease
 	if abs(_velocity.x) < _minimum_velocity: _velocity = Vector2(0, _velocity.y)
@@ -56,11 +72,11 @@ func _physics_process(delta):
 		
 	if _fire_input.x != 0:
 		$Sprite.flip_h = _fire_input.x < 0
-		$WeaponHoldPoint.position.x = 2.5 * -sign(_fire_input.x)
+		$WeaponHoldPoint.position.x = 2 * -sign(_fire_input.x)
 		_current_weapon._set_right(_fire_input.x > 0)
 	elif _input.x != 0:
 		$Sprite.flip_h = _input.x < 0
-		$WeaponHoldPoint.position.x = 2.5 * -sign(_input.x)
+		$WeaponHoldPoint.position.x = 2 * -sign(_input.x)
 		_current_weapon._set_right(_input.x > 0)
 	
 	if _fire_input != Vector2.ZERO:

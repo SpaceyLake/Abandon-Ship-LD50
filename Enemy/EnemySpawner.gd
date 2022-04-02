@@ -17,7 +17,7 @@ func _ready():
 	_spawn_timer.start(_spawn_time + rng.randf_range(-_time_offset, _time_offset))
 
 func _spawn():
-	if _enemies_spawned <= _max_spawned:
+	if _enemies_spawned < _max_spawned:
 		var spawned_enemy = Global.instance_node(_enemy, global_position, Global._node_creation_parent)
 		spawned_enemy._set_target_position(global_position + Vector2(sign(randi() % 2 - 0.5) * (_minimum_target.x + rng.randf_range(0, _target_offset.x)), sign(randi() % 2 - 0.5) * (_minimum_target.y + rng.randf_range(0, _target_offset.y))))
 		spawned_enemy.connect("_enemy_killed", self, "_enemy_killed")
