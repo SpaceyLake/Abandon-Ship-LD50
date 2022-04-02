@@ -4,8 +4,8 @@
 [ext_resource path="res://Enemy/EnemySpawner.gd" type="Script" id=2]
 
 [sub_resource type="CapsuleShape2D" id=1]
-radius = 9.99998
-height = 12.0
+radius = 9.0
+height = 16.0
 
 [sub_resource type="Animation" id=2]
 resource_name = "Idle"
@@ -50,7 +50,6 @@ rotation = 1.5708
 shape = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
-position = Vector2( 0, 4.76837e-07 )
 texture = ExtResource( 1 )
 hframes = 4
 
@@ -61,3 +60,5 @@ one_shot = true
 autoplay = "Idle"
 anims/Idle = SubResource( 2 )
 anims/RESET = SubResource( 3 )
+
+[node name="HullDamageTimer" type="Timer" parent="."]
