@@ -2,12 +2,16 @@ extends KinematicBody2D
 
 var _input : Vector2 = Vector2.ZERO
 var _velocity : Vector2 = Vector2.ZERO
-var _velocity_decrease = 0.85
-var _movement_speed : int = 300
+export var _velocity_decrease = 0.85
+export var _movement_speed : int = 300
 export var _minimum_velocity : float = 0.01
+#export(Array, PackedScene) var weapons
+export var weapon : PackedScene
+onready var _current_weapon
 
 func _ready():
 	Global._player = self
+	_current_weapon = Global.instance_node(weapon, $WeaponHoldPoint.global_position, self)
 	pass
 
 func _physics_process(delta):
@@ -18,6 +22,11 @@ func _physics_process(delta):
 	if abs(_velocity.x) < _minimum_velocity: _velocity = Vector2(0, _velocity.y)
 	if abs(_velocity.y) < _minimum_velocity: _velocity = Vector2(_velocity.x, 0)
 	_velocity = move_and_slide(_velocity, Vector2.ZERO, false)
+	
+	if Input.is_action_just_pressed("fire_up"): _current_weapon._fire(Vector2.UP)
+	if Input.is_action_just_pressed("fire_down"): _current_weapon._fire(Vector2.DOWN)
+	if Input.is_action_just_pressed("fire_left"): _current_weapon._fire(Vector2.LEFT)
+	if Input.is_action_just_pressed("fire_right"): _current_weapon._fire(Vector2.RIGHT)
 	
 	#Animation
 	if _input == Vector2.ZERO:
