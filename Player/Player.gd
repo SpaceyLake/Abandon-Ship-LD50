@@ -41,18 +41,10 @@ func _physics_process(delta):
 	_velocity = move_and_slide(_velocity, Vector2.ZERO, false)
 	
 	_fire_input = Vector2.ZERO
-	if Input.is_action_pressed("fire_up"):
-		_fire_input = Vector2.UP
-		_current_weapon._fire(_fire_input)
-	if Input.is_action_pressed("fire_down"):
-		_fire_input = Vector2.DOWN
-		_current_weapon._fire(_fire_input)
-	if Input.is_action_pressed("fire_left"):
-		_fire_input = Vector2.LEFT
-		_current_weapon._fire(_fire_input)
-	if Input.is_action_pressed("fire_right"):
-		_fire_input = Vector2.RIGHT
-		_current_weapon._fire(_fire_input)
+	if Input.is_action_pressed("fire_up"): _fire_input = Vector2.UP
+	if Input.is_action_pressed("fire_down"): _fire_input = Vector2.DOWN
+	if Input.is_action_pressed("fire_left"): _fire_input = Vector2.LEFT
+	if Input.is_action_pressed("fire_right"): _fire_input = Vector2.RIGHT
 	
 	#Animation
 	if _input == Vector2.ZERO:
@@ -70,6 +62,9 @@ func _physics_process(delta):
 		$Sprite.flip_h = _input.x < 0
 		$WeaponHoldPoint.position.x = 2.5 * -sign(_input.x)
 		_current_weapon._set_right(_input.x > 0)
+	
+	if _fire_input != Vector2.ZERO:
+		_current_weapon._fire(_fire_input)
 
 func _exit_tree():
 	Global._player = null
