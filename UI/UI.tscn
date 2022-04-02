@@ -1,9 +1,15 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://UI/UI.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/Gui/bar_empty.png" type="Texture" id=2]
 [ext_resource path="res://Sprites/Gui/bar_health.png" type="Texture" id=3]
 [ext_resource path="res://Sprites/Gui/bar_cap.png" type="Texture" id=4]
+[ext_resource path="res://Sprites/Gui/bar_oxygen_icon.png" type="Texture" id=5]
+[ext_resource path="res://Sprites/Gui/bar_oxygen.png" type="Texture" id=6]
+[ext_resource path="res://Sprites/Gui/bar_hull.png" type="Texture" id=7]
+[ext_resource path="res://Sprites/Gui/bar_hull_icon.png" type="Texture" id=8]
+[ext_resource path="res://Sprites/Gui/seven_segment.png" type="Texture" id=9]
+[ext_resource path="res://Sprites/Gui/bar_evac.png" type="Texture" id=10]
 
 [node name="UI" type="CanvasLayer"]
 script = ExtResource( 1 )
@@ -33,23 +39,30 @@ margin_bottom = 8.0
 texture = ExtResource( 4 )
 
 [node name="Oxygenbar" type="Control" parent="."]
-margin_top = 8.0
-margin_right = 40.0
-margin_bottom = 48.0
+margin_left = 216.0
+margin_right = 256.0
+margin_bottom = 8.0
 
 [node name="Oxygenbar" type="TextureProgress" parent="Oxygenbar"]
-margin_left = 4.0
+margin_left = -28.0
 margin_top = 1.0
-margin_right = 5.0
+margin_right = -27.0
 margin_bottom = 7.0
-rect_scale = Vector2( 32, 1 )
+rect_scale = Vector2( 64, 1 )
 texture_under = ExtResource( 2 )
-texture_progress = ExtResource( 3 )
+texture_progress = ExtResource( 6 )
 
 [node name="OxygenBarCap" type="TextureRect" parent="Oxygenbar"]
-margin_right = 4.0
+margin_left = -32.0
+margin_right = -28.0
 margin_bottom = 8.0
 texture = ExtResource( 4 )
+
+[node name="OxygenBarIcon" type="TextureRect" parent="Oxygenbar"]
+margin_left = -48.0
+margin_right = -32.0
+margin_bottom = 8.0
+texture = ExtResource( 5 )
 
 [node name="OxygenBarCap2" type="TextureRect" parent="Oxygenbar"]
 margin_left = 36.0
@@ -58,23 +71,31 @@ margin_bottom = 8.0
 texture = ExtResource( 4 )
 
 [node name="Hullbar" type="Control" parent="."]
-margin_top = 16.0
-margin_right = 40.0
-margin_bottom = 56.0
+margin_left = 216.0
+margin_top = 8.0
+margin_right = 256.0
+margin_bottom = 16.0
 
 [node name="Hullbar" type="TextureProgress" parent="Hullbar"]
-margin_left = 4.0
+margin_left = -28.0
 margin_top = 1.0
-margin_right = 5.0
+margin_right = -27.0
 margin_bottom = 7.0
-rect_scale = Vector2( 32, 1 )
+rect_scale = Vector2( 64, 1 )
 texture_under = ExtResource( 2 )
-texture_progress = ExtResource( 3 )
+texture_progress = ExtResource( 7 )
 
 [node name="HullBarCap" type="TextureRect" parent="Hullbar"]
-margin_right = 4.0
+margin_left = -32.0
+margin_right = -28.0
 margin_bottom = 8.0
 texture = ExtResource( 4 )
+
+[node name="HullBarIcon" type="TextureRect" parent="Hullbar"]
+margin_left = -40.0
+margin_right = -32.0
+margin_bottom = 8.0
+texture = ExtResource( 8 )
 
 [node name="HullBarCap2" type="TextureRect" parent="Hullbar"]
 margin_left = 36.0
@@ -87,22 +108,39 @@ margin_top = 24.0
 margin_right = 40.0
 margin_bottom = 64.0
 
-[node name="Evacuationbar" type="TextureProgress" parent="Evacuationbar"]
-margin_left = 4.0
-margin_top = 1.0
-margin_right = 5.0
-margin_bottom = 7.0
-rect_scale = Vector2( 32, 1 )
-texture_under = ExtResource( 2 )
-texture_progress = ExtResource( 3 )
+[node name="EvacuationBackground" type="TextureRect" parent="Evacuationbar"]
+margin_left = 181.0
+margin_top = -6.0
+margin_right = 256.0
+margin_bottom = 10.0
+texture = ExtResource( 10 )
 
-[node name="EvacuationBarCap" type="TextureRect" parent="Evacuationbar"]
-margin_right = 4.0
-margin_bottom = 8.0
-texture = ExtResource( 4 )
+[node name="Number1" type="Sprite" parent="Evacuationbar/EvacuationBackground"]
+position = Vector2( 16, 8 )
+texture = ExtResource( 9 )
+hframes = 10
 
-[node name="EvacuationBarCap2" type="TextureRect" parent="Evacuationbar"]
-margin_left = 36.0
-margin_right = 40.0
-margin_bottom = 8.0
-texture = ExtResource( 4 )
+[node name="Number2" type="Sprite" parent="Evacuationbar/EvacuationBackground"]
+position = Vector2( 25, 8 )
+texture = ExtResource( 9 )
+hframes = 10
+
+[node name="Number3" type="Sprite" parent="Evacuationbar/EvacuationBackground"]
+position = Vector2( 34, 8 )
+texture = ExtResource( 9 )
+hframes = 10
+
+[node name="Number4" type="Sprite" parent="Evacuationbar/EvacuationBackground"]
+position = Vector2( 52, 8 )
+texture = ExtResource( 9 )
+hframes = 10
+
+[node name="Number5" type="Sprite" parent="Evacuationbar/EvacuationBackground"]
+position = Vector2( 61, 8 )
+texture = ExtResource( 9 )
+hframes = 10
+
+[node name="Number6" type="Sprite" parent="Evacuationbar/EvacuationBackground"]
+position = Vector2( 70, 8 )
+texture = ExtResource( 9 )
+hframes = 10

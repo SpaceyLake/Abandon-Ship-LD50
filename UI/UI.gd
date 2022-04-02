@@ -3,7 +3,7 @@ extends CanvasLayer
 onready var _healthbar = $Healthbar/Healthbar
 onready var _oxygenbar = $Oxygenbar/Oxygenbar
 onready var _hullbar = $Hullbar/Hullbar
-onready var _evacuationbar = $Evacuationbar/Evacuationbar
+onready var _evacuation_numbers = $Evacuationbar/EvacuationBackground.get_children()
 
 func _ready():
 	Global._UI = self
@@ -30,7 +30,13 @@ func _set_hull_integrity(hull_integrity):
 	_hullbar.value = hull_integrity
 
 func _set_total_crew(total_crew):
-	_evacuationbar.max_value = total_crew
+	if total_crew > 999: total_crew = 999
+	_evacuation_numbers[3].frame = floor(total_crew/100)
+	_evacuation_numbers[4].frame = floor((total_crew%100)/10)
+	_evacuation_numbers[5].frame = total_crew%10
 
 func _set_evacuated_crew(evacuated_crew):
-	_evacuationbar.value = evacuated_crew
+	if evacuated_crew > 999: evacuated_crew = 999
+	_evacuation_numbers[0].frame = floor(evacuated_crew/100)
+	_evacuation_numbers[1].frame = floor((evacuated_crew%100)/10)
+	_evacuation_numbers[2].frame = evacuated_crew%10
