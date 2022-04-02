@@ -2,8 +2,8 @@ extends KinematicBody2D
 
 var _input : Vector2 = Vector2.ZERO
 var _velocity : Vector2 = Vector2.ZERO
-export var _velocity_decrease = 0.9
-export var _movement_speed : int = 100
+var _velocity_decrease = 0.85
+var _movement_speed : int = 300
 export var _minimum_velocity : float = 0.01
 
 func _ready():
