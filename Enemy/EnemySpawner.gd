@@ -11,6 +11,7 @@ export var _max_spawned : int = 8
 var _enemies_spawned : int = 0
 onready var _spawn_timer : Timer = $SpawnTimer
 onready var _hull_damage_timer : Timer = $HullDamageTimer
+onready var _influence_area : Area2D = $InfluenceArea
 var rng = RandomNumberGenerator.new()
 
 func _ready():
@@ -31,9 +32,16 @@ func _spawn():
 		_enemies_spawned += 1
 		_spawn_timer.start(_spawn_time + rng.randf_range(-_time_offset, _time_offset))
 
-func _bullet_hit(damage, _knockback, _bullet_velocity, _bullet_origin):
+func _bullet_hit(damage, _knockback, _bullet_velocity, bullet_origin):
+	_influence(bullet_origin)
 	_health -= damage
 	if _health <= 0: queue_free()
+
+func _influence(target_position):
+	var bodies = _influence_area.get_overlapping_bodies()
+	for body in bodies:
+		if body.is_in_group("Enemy"):
+			body._set_target_position(target_position)
 
 func _enemy_killed():
 	if _enemies_spawned >= _max_spawned:

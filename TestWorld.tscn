@@ -61,6 +61,12 @@ _enemy = ExtResource( 2 )
 position = Vector2( 48, 48 )
 _enemy = ExtResource( 2 )
 
+[node name="Enemy" parent="EnemySpawner3" instance=ExtResource( 2 )]
+position = Vector2( 48, 16 )
+
+[node name="Enemy2" parent="EnemySpawner3" instance=ExtResource( 2 )]
+position = Vector2( 48, -8 )
+
 [node name="ControlPanel" parent="." instance=ExtResource( 9 )]
 position = Vector2( 152, 72 )
 _door_path = NodePath("../HDoor2")
