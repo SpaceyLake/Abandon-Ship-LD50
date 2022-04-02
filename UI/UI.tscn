@@ -8,7 +8,11 @@
 [node name="UI" type="CanvasLayer"]
 script = ExtResource( 1 )
 
-[node name="Healthbar" type="TextureProgress" parent="."]
+[node name="Healthbar" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="Healthbar" type="TextureProgress" parent="Healthbar"]
 margin_left = 4.0
 margin_top = 1.0
 margin_right = 5.0
@@ -17,12 +21,87 @@ rect_scale = Vector2( 32, 1 )
 texture_under = ExtResource( 2 )
 texture_progress = ExtResource( 3 )
 
-[node name="HealthBarCap" type="TextureRect" parent="."]
+[node name="HealthBarCap" type="TextureRect" parent="Healthbar"]
 margin_right = 4.0
 margin_bottom = 8.0
 texture = ExtResource( 4 )
 
-[node name="HealthBarCap2" type="TextureRect" parent="."]
+[node name="HealthBarCap2" type="TextureRect" parent="Healthbar"]
+margin_left = 36.0
+margin_right = 40.0
+margin_bottom = 8.0
+texture = ExtResource( 4 )
+
+[node name="Oxygenbar" type="Control" parent="."]
+margin_top = 8.0
+margin_right = 40.0
+margin_bottom = 48.0
+
+[node name="Oxygenbar" type="TextureProgress" parent="Oxygenbar"]
+margin_left = 4.0
+margin_top = 1.0
+margin_right = 5.0
+margin_bottom = 7.0
+rect_scale = Vector2( 32, 1 )
+texture_under = ExtResource( 2 )
+texture_progress = ExtResource( 3 )
+
+[node name="OxygenBarCap" type="TextureRect" parent="Oxygenbar"]
+margin_right = 4.0
+margin_bottom = 8.0
+texture = ExtResource( 4 )
+
+[node name="OxygenBarCap2" type="TextureRect" parent="Oxygenbar"]
+margin_left = 36.0
+margin_right = 40.0
+margin_bottom = 8.0
+texture = ExtResource( 4 )
+
+[node name="Hullbar" type="Control" parent="."]
+margin_top = 16.0
+margin_right = 40.0
+margin_bottom = 56.0
+
+[node name="Hullbar" type="TextureProgress" parent="Hullbar"]
+margin_left = 4.0
+margin_top = 1.0
+margin_right = 5.0
+margin_bottom = 7.0
+rect_scale = Vector2( 32, 1 )
+texture_under = ExtResource( 2 )
+texture_progress = ExtResource( 3 )
+
+[node name="HullBarCap" type="TextureRect" parent="Hullbar"]
+margin_right = 4.0
+margin_bottom = 8.0
+texture = ExtResource( 4 )
+
+[node name="HullBarCap2" type="TextureRect" parent="Hullbar"]
+margin_left = 36.0
+margin_right = 40.0
+margin_bottom = 8.0
+texture = ExtResource( 4 )
+
+[node name="Evacuationbar" type="Control" parent="."]
+margin_top = 24.0
+margin_right = 40.0
+margin_bottom = 64.0
+
+[node name="Evacuationbar" type="TextureProgress" parent="Evacuationbar"]
+margin_left = 4.0
+margin_top = 1.0
+margin_right = 5.0
+margin_bottom = 7.0
+rect_scale = Vector2( 32, 1 )
+texture_under = ExtResource( 2 )
+texture_progress = ExtResource( 3 )
+
+[node name="EvacuationBarCap" type="TextureRect" parent="Evacuationbar"]
+margin_right = 4.0
+margin_bottom = 8.0
+texture = ExtResource( 4 )
+
+[node name="EvacuationBarCap2" type="TextureRect" parent="Evacuationbar"]
 margin_left = 36.0
 margin_right = 40.0
 margin_bottom = 8.0
