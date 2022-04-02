@@ -48,7 +48,7 @@ tracks/1/keys = {
 }
 
 [sub_resource type="Animation" id=4]
-resource_name = "Idel"
+resource_name = "Idle"
 length = 0.1
 loop = true
 tracks/0/type = "value"
@@ -134,6 +134,6 @@ shape = SubResource( 2 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/Attack = SubResource( 3 )
-anims/Idel = SubResource( 4 )
+anims/Idle = SubResource( 4 )
 anims/RESET = SubResource( 5 )
 anims/Walk = SubResource( 6 )
