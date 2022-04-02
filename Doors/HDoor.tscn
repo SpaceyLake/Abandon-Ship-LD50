@@ -61,6 +61,7 @@ tracks/1/keys = {
 }
 
 [node name="HDoor" type="Node2D"]
+z_index = -2
 script = ExtResource( 2 )
 
 [node name="DoorLeft" type="KinematicBody2D" parent="."]
