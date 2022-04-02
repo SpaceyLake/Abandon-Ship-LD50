@@ -22,8 +22,8 @@ onready var _sprite_holding = preload("res://Sprites/Player/player_walk_armless.
 
 func _ready():
 	Global._player = self
-	connect("max_health_changed", Global._UI, "_update_max_health")
-	connect("health_changed", Global._UI, "_update_healthbar")
+	connect("max_health_changed", Global._UI, "_set_max_health")
+	connect("health_changed", Global._UI, "_set_healthbar")
 	emit_signal("max_health_changed", _max_health)
 	emit_signal("health_changed", _health)
 	_current_weapon = Global.instance_node(_weapon, $WeaponHoldPoint.global_position, $WeaponHoldPoint)
