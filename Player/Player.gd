@@ -72,11 +72,11 @@ func _physics_process(delta):
 		
 	if _fire_input.x != 0:
 		$Sprite.flip_h = _fire_input.x < 0
-		$WeaponHoldPoint.position.x = 2 * -sign(_fire_input.x)
+		$WeaponHoldPoint.position.x = 3 * -sign(_fire_input.x)
 		_current_weapon._set_right(_fire_input.x > 0)
 	elif _input.x != 0:
 		$Sprite.flip_h = _input.x < 0
-		$WeaponHoldPoint.position.x = 2 * -sign(_input.x)
+		$WeaponHoldPoint.position.x = 3 * -sign(_input.x)
 		_current_weapon._set_right(_input.x > 0)
 	
 	if _fire_input != Vector2.ZERO:
