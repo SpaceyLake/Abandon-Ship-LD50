@@ -2,7 +2,9 @@ extends Node
 
 var _player : KinematicBody2D = null
 
-var _node_creation_parent = null
+var _UI : CanvasLayer = null
+
+var _node_creation_parent : Node2D = null
 
 func instance_node(node, location, parent):
 	if parent == null: return null
