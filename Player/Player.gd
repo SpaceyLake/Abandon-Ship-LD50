@@ -7,6 +7,7 @@ export var _movement_speed : int = 100
 export var _minimum_velocity : float = 0.01
 
 func _ready():
+	Global._player = self
 	pass
 
 func _physics_process(delta):
@@ -25,3 +26,6 @@ func _physics_process(delta):
 		$AnimationPlayer.play("Walk")
 		if _input.x != 0:
 			$Sprite.flip_h = _input.x < 0
+
+func _exit_tree():
+	Global._player = null
