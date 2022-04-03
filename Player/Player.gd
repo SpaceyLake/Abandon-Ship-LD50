@@ -19,6 +19,7 @@ onready var _touch : RayCast2D = $Touch
 var _weapons : Array = []
 var _weapon_index : int = 0
 var _interacting_object : Node2D = null
+var _direction_x : bool
 
 onready var _sprite_default = preload("res://Sprites/Player/player_walk.png")
 onready var _sprite_holding = preload("res://Sprites/Player/player_walk_armless.png")
@@ -91,6 +92,7 @@ func _physics_process(delta):
 		$WeaponHoldPoint.position.x = 3 * -sign(_fire_input.x)
 		_weapons[_weapon_index]._set_right(_fire_input.x > 0)
 	elif _input.x != 0:
+		
 		$Sprite.flip_h = _input.x < 0
 		$WeaponHoldPoint.position.x = 3 * -sign(_input.x)
 		_weapons[_weapon_index]._set_right(_input.x > 0)
@@ -113,6 +115,7 @@ func _swap_weapon():
 		_weapon_index += 1
 	else:
 		_weapon_index = 0
+	_weapons[_weapon_index]._set_right(!$Sprite.flip_h)
 	_weapons[_weapon_index].visible = true
 
 func _heal():
