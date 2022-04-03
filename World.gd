@@ -22,6 +22,7 @@ onready var _door = []
 export var _first_hazard_time : float = 0.5
 export(Array, NodePath) var _escape_pod_control_path
 onready var _escape_pods = []
+var _cleared : bool = false
 var _won : bool = false
 
 func _ready():
@@ -106,14 +107,14 @@ func _fix_hull_arbitrary(fix):
 		Global._UI._set_hull_integrity(_hull_integrity)
 
 func _evacuate():
-	if not _won:
+	if not _cleared:
 		var _evac = _rng.randi_range(0, 10)
 		if _evac > _total_crew-_evacuated_crew: _evac = _total_crew-_evacuated_crew
 		_evacuated_crew += _evac
 		Global._UI._set_evacuated_crew(_evacuated_crew)
 		_evacuation_timer.start(_evacuation_time*_evac)
 		if _evacuated_crew == _total_crew: 
-			_won = true
+			_cleared = true
 			for door in _door:
 				door.open()
 
@@ -122,10 +123,11 @@ func _exit_tree():
 
 func _start_win_timer():
 	_win_timer.start()
+	_won = true
 	pass
 
 func _win():
-	print("You win")
+	get_tree().change_scene("res://EndWin.tscn")
 
 func _lose():
-	pass
+	get_tree().change_scene("res://EndLose.tscn")
