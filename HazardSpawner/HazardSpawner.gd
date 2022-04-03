@@ -12,7 +12,11 @@ func _ready():
 	add_to_group("Hazard")
 
 func _spawn_hazard():
-	_hazard_type = _rng.randi_range(0, hazards.size() - 1)
+	var hazard_randomization = _rng.randi_range(0, 3)
+	if hazard_randomization == 0:
+		_hazard_type = 1
+	else:
+		_hazard_type = 0
 	var hazard = Global.instance_node(hazards[_hazard_type], global_position, Global._node_creation_parent)
 	hazard._set_spawner(self)
 	emit_signal("_sync_map", true, _hazard_type)

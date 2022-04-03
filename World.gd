@@ -6,7 +6,7 @@ export var _total_crew : int = 100
 export var _evacuation_time : float = 2
 export var _hazard_spawn_time : float = 10
 export var _hazard_time_offset : float = 5
-export var _oxygen_regen_time : float = 3
+export var _oxygen_regen_time : float = 2
 var _hull_integrity : int
 var _oxygen_level : int
 var _evacuated_crew : int
@@ -17,8 +17,10 @@ onready var _win_timer : Timer = $WinTimer
 var _possible_hazards : Array = []
 var _active_hazards : Array = []
 var _rng = RandomNumberGenerator.new()
-export(NodePath) var _door_path
-onready var _door = get_node(_door_path)
+export(Array, NodePath) var _door_path
+onready var _door = []
+export(Array, NodePath) var _escape_pod_control_path
+onready var _escape_pods = [get_node(_escape_pod_control_path[0]), get_node(_escape_pod_control_path[1])]
 
 func _ready():
 	_rng.randomize()
@@ -32,7 +34,12 @@ func _ready():
 	Global._UI._set_hull_integrity(_hull_integrity)
 	Global._UI._set_total_crew(_total_crew)
 	Global._UI._set_evacuated_crew(_evacuated_crew)
-	get_node("EscapePodControl").connect("_win", self, "_start_win_timer")
+	for path in _door_path:
+		_door.append(get_node(path))
+	for path in _escape_pod_control_path:
+		_escape_pods.append(get_node(path))
+	for pod in _escape_pods:
+		pod.connect("_win", self, "_start_win_timer")
 	_win_timer.connect("timeout", self, "_win")
 	_evacuation_timer.connect("timeout", self, "_evacuate")
 	_evacuation_timer.start(_evacuation_time)
@@ -47,6 +54,8 @@ func _ready():
 		if child.is_in_group("Hazard"):
 			_possible_hazards.append(child)
 			child.connect("_hazard_fixed", self, "_hazard_fixed", [child])
+	_possible_hazards.shuffle()
+	_possible_hazards.shuffle()
 	_possible_hazards.shuffle()
 	_hazard_timer.start(_hazard_spawn_time + _rng.randf_range(0, _hazard_time_offset))
 
@@ -90,7 +99,9 @@ func _evacuate():
 	_evacuated_crew += _evac
 	Global._UI._set_evacuated_crew(_evacuated_crew)
 	_evacuation_timer.start(_evacuation_time*_evac)
-	if _evacuated_crew == _total_crew: _door.open()
+	if _evacuated_crew == _total_crew: 
+		for door in _door:
+			door.open()
 
 func _exit_tree():
 	Global._node_creation_parent = null

@@ -1,9 +1,9 @@
 extends StaticBody2D
 
 var _spawner = null
-export var _max_health : int = 5
+export var _max_health : int = 30
 var _health : int
-export var _oxygen_drain_time : float = 1
+export var _oxygen_drain_time : float = 4
 
 onready var _oxygen_drain_timer : Timer = $OxygenDrainTimer
 

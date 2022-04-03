@@ -25,7 +25,7 @@ func _ready():
 	var imageTexture = ImageTexture.new()
 	var dynImage = Image.new()
 	
-	dynImage.create(_map_size.x, _map_size.y,false,Image.FORMAT_RGB8)
+	dynImage.create(_map_size.x, _map_size.y,false,Image.FORMAT_RGBA8)
 	dynImage.fill(_background_color)
 	dynImage.lock()
 	
@@ -45,9 +45,6 @@ func _ready():
 	var player = world.get_node("Player")
 	_player_marker = Global.instance_control_node(_player_marker_resource, rect_global_position + (player.global_position/16).floor(), self)
 	player.connect("_sync_map", self, "_sync_player")
-	
-	var escape_pod_control = world.get_node("EscapePodControl")
-	Global.instance_control_node(_escape_pod_control_marker_resource, rect_global_position + (escape_pod_control.global_position/16).floor(), self)
 	
 	var world_objects = world.get_children()
 	for object in world_objects:
@@ -69,6 +66,8 @@ func _ready():
 		if object.is_in_group("HealStation"):
 			print("HealStation Found")
 			Global.instance_control_node(_heal_station_marker_resource, rect_global_position + (object.global_position/16).floor(), self)
+		if object.is_in_group("EscapePodControl"):
+			Global.instance_control_node(_escape_pod_control_marker_resource, rect_global_position + (object.global_position/16).floor(), self)
 
 func _sync_player(_position):
 	_player_marker.rect_global_position = rect_global_position + (_position/16).floor() 
