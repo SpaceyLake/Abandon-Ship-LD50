@@ -8,7 +8,7 @@
 [ext_resource path="res://Sprites/Gui/bar_oxygen.png" type="Texture" id=6]
 [ext_resource path="res://Sprites/Gui/bar_hull.png" type="Texture" id=7]
 [ext_resource path="res://Sprites/Gui/bar_hull_icon.png" type="Texture" id=8]
-[ext_resource path="res://Sprites/Terrain/seven_segment.png" type="Texture" id=9]
+[ext_resource path="res://Sprites/Gui/seven_segment.png" type="Texture" id=9]
 [ext_resource path="res://Sprites/Gui/bar_evac.png" type="Texture" id=10]
 [ext_resource path="res://UI/Minimap.gd" type="Script" id=11]
 [ext_resource path="res://UI/PlayerMarker.tscn" type="PackedScene" id=12]
@@ -20,6 +20,7 @@
 [ext_resource path="res://UI/BreachMarker.tscn" type="PackedScene" id=18]
 [ext_resource path="res://UI/EscapePodControlMarker.tscn" type="PackedScene" id=19]
 [ext_resource path="res://UI/HealStationMarker.tscn" type="PackedScene" id=20]
+
 
 [node name="UI" type="CanvasLayer"]
 script = ExtResource( 1 )

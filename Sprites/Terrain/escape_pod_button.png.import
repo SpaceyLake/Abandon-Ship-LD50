@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/seven_segment.png-a333fb3eacf3e1f7663bf645c909e360.stex"
+path="res://.import/escape_pod_button.png-eb3d0936e2883342a5076f505ceb3b07.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/Terrain/seven_segment.png"
-dest_files=[ "res://.import/seven_segment.png-a333fb3eacf3e1f7663bf645c909e360.stex" ]
+source_file="res://Sprites/Terrain/escape_pod_button.png"
+dest_files=[ "res://.import/escape_pod_button.png-eb3d0936e2883342a5076f505ceb3b07.stex" ]
 
 [params]
 
