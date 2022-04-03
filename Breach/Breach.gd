@@ -8,6 +8,7 @@ export var _oxygen_drain_time : float = 4
 onready var _oxygen_drain_timer : Timer = $OxygenDrainTimer
 
 func _ready():
+	add_to_group("ActiveHazard")
 	var _rng = RandomNumberGenerator.new()
 	_rng.randomize()
 	$Sprite.frame = _rng.randi_range(0, 5)
