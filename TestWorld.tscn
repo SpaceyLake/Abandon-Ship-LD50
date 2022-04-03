@@ -22,12 +22,6 @@ one_shot = true
 
 [node name="OxygenRegenTimer" type="Timer" parent="."]
 
-[node name="UI" parent="." instance=ExtResource( 7 )]
-
-[node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( 160, 48 )
-_weapon = ExtResource( 4 )
-
 [node name="HDoor" parent="." instance=ExtResource( 5 )]
 position = Vector2( 112, 160 )
 
@@ -91,3 +85,9 @@ _door_path = NodePath("../VDoor2")
 [node name="ControlPanel8" parent="." instance=ExtResource( 9 )]
 position = Vector2( 168, 152 )
 _door_path = NodePath("../VDoor2")
+
+[node name="UI" parent="." instance=ExtResource( 7 )]
+
+[node name="Player" parent="." instance=ExtResource( 1 )]
+position = Vector2( 160, 48 )
+_weapon = ExtResource( 4 )

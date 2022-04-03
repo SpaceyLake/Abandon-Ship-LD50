@@ -1,4 +1,6 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://UI/DoorMarker.gd" type="Script" id=1]
 
 [sub_resource type="Animation" id=1]
 resource_name = "Close"
@@ -84,6 +86,7 @@ tracks/1/keys = {
 [node name="HDoorMarker" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+script = ExtResource( 1 )
 
 [node name="ColorRect" type="ColorRect" parent="."]
 margin_left = -1.0

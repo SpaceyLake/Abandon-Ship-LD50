@@ -2,6 +2,7 @@ extends KinematicBody2D
 
 signal health_changed(health)
 signal max_health_changed(max_health)
+signal _sync_map(_position)
 
 const _max_health = 10
 var _health = 10
@@ -55,7 +56,7 @@ func _physics_process(delta):
 	if abs(_velocity.x) < _minimum_velocity: _velocity = Vector2(0, _velocity.y)
 	if abs(_velocity.y) < _minimum_velocity: _velocity = Vector2(_velocity.x, 0)
 	_velocity = move_and_slide(_velocity, Vector2.ZERO, false)
-	
+	emit_signal("_sync_map", global_position)
 	_fire_input = Vector2.ZERO
 	if Input.is_action_pressed("fire_up"): _fire_input = Vector2.UP
 	if Input.is_action_pressed("fire_down"): _fire_input = Vector2.DOWN
