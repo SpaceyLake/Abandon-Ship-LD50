@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://UI/UI.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/Gui/bar_empty.png" type="Texture" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://Sprites/Gui/bar_hull_icon.png" type="Texture" id=8]
 [ext_resource path="res://Sprites/Terrain/seven_segment.png" type="Texture" id=9]
 [ext_resource path="res://Sprites/Gui/bar_evac.png" type="Texture" id=10]
+[ext_resource path="res://UI/Minimap.gd" type="Script" id=11]
 
 [node name="UI" type="CanvasLayer"]
 script = ExtResource( 1 )
@@ -144,3 +145,12 @@ hframes = 10
 position = Vector2( 70, 8 )
 texture = ExtResource( 9 )
 hframes = 10
+
+[node name="Minimap" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="Minimap" type="TextureRect" parent="Minimap"]
+margin_right = 40.0
+margin_bottom = 40.0
+script = ExtResource( 11 )
