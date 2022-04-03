@@ -57,15 +57,18 @@ func _physics_process(delta):
 			if _input.x != 0:
 				$Sprite.flip_h = _input.x < 0
 
-func _bullet_hit(damage, knockback, bullet_velocity, _bullet_origin):
-	_target_position = _bullet_origin
+func _bullet_hit(damage, knockback, bullet_velocity, bullet_origin):
+	_target_position = bullet_origin
 	_influence()
 	_health -= damage
 	_velocity += bullet_velocity * knockback
-	print(_velocity)
 	if _health <= 0:
 		emit_signal("_enemy_killed")
 		queue_free()
+
+func _foam_hit(_repair, knockback, bullet_velocity, bullet_origin):
+	_target_position = bullet_origin
+	_velocity += bullet_velocity * knockback
 
 func _influence():
 	var bodies = _influence_area.get_overlapping_bodies()
