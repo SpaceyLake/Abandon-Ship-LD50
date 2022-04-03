@@ -7,6 +7,7 @@
 radius = 7.0
 
 [node name="StaticBody2D" type="StaticBody2D"]
+collision_layer = 128
 collision_mask = 0
 script = ExtResource( 2 )
 _oxygen_drain_time = 2.0
