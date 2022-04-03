@@ -1,12 +1,9 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Sprites/Enemies/enemy_spawner.png" type="Texture" id=1]
 [ext_resource path="res://Enemy/EnemySpawner.gd" type="Script" id=2]
 [ext_resource path="res://Enemy/Enemy.tscn" type="PackedScene" id=3]
-<<<<<<< HEAD
-=======
 [ext_resource path="res://Enemy/EnemyFloater.tscn" type="PackedScene" id=4]
->>>>>>> 86f07dedafb83eccf7c626692efeb1c5296d23ee
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 9.99998
@@ -51,15 +48,11 @@ radius = 56.0
 collision_layer = 32
 collision_mask = 8
 script = ExtResource( 2 )
-<<<<<<< HEAD
-_enemy = ExtResource( 3 )
-_hull_damage_time = 4.0
-_health = 15
-_max_spawned = 5
-=======
 _enemy_common = ExtResource( 3 )
 _enemy_rare = ExtResource( 4 )
->>>>>>> 86f07dedafb83eccf7c626692efeb1c5296d23ee
+_hull_damage_time = 4.0
+_health = 10
+_max_spawned = 5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, 1 )
