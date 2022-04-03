@@ -5,3 +5,6 @@ func _ready():
 
 func _interact():
 	Global._player._swap_weapon()
+
+func _stop_interaction():
+	pass
