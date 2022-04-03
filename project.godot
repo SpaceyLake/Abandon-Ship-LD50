@@ -13,6 +13,8 @@ config_version=4
 config/name="Abandon Ship"
 run/main_scene="res://MainMenu.tscn"
 config/icon="res://Icon.png"
+config/macos_native_icon="res://Icon.icns"
+config/windows_native_icon="res://Icon.ico"
 
 [autoload]
 
