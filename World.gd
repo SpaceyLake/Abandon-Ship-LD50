@@ -13,22 +13,27 @@ var _evacuated_crew : int
 onready var _evacuation_timer : Timer = $EvacuationTimer
 onready var _hazard_timer : Timer = $HazardTimer
 onready var _oxygen_regen_timer : Timer = $OxygenRegenTimer
+onready var _win_timer : Timer = $WinTimer
 var _possible_hazards : Array = []
 var _active_hazards : Array = []
 var _rng = RandomNumberGenerator.new()
+export(NodePath) var _door_path
+onready var _door = get_node(_door_path)
 
 func _ready():
 	_rng.randomize()
 	Global._node_creation_parent = self
 	_hull_integrity = _max_hull_integrity
 	_oxygen_level = _max_oxygen_level
-	_evacuated_crew = 0
+	_evacuated_crew = 98
 	Global._UI._set_max_oxygen(_max_oxygen_level)
 	Global._UI._set_oxygen_level(_oxygen_level)
 	Global._UI._set_max_hull(_max_hull_integrity)
 	Global._UI._set_hull_integrity(_hull_integrity)
 	Global._UI._set_total_crew(_total_crew)
 	Global._UI._set_evacuated_crew(_evacuated_crew)
+	get_node("EscapePodControl").connect("_win", self, "_start_win_timer")
+	_win_timer.connect("timeout", self, "_win")
 	_evacuation_timer.connect("timeout", self, "_evacuate")
 	_evacuation_timer.start(_evacuation_time)
 	_hazard_timer.connect("timeout", self, "_spawn_hazard")
@@ -64,10 +69,12 @@ func _regen_oxygen():
 func _drain_oxygen():
 	_oxygen_level -= 1
 	Global._UI._set_oxygen_level(_oxygen_level)
+	if _oxygen_level == 0: _lose()
 
 func _damage_hull():
 	_hull_integrity -= 1
 	Global._UI._set_hull_integrity(_hull_integrity)
+	if _hull_integrity == 0: _lose()
 
 func _damage_hull_arbitrary(damage):
 	_hull_integrity -= damage
@@ -83,6 +90,17 @@ func _evacuate():
 	_evacuated_crew += _evac
 	Global._UI._set_evacuated_crew(_evacuated_crew)
 	_evacuation_timer.start(_evacuation_time*_evac)
+	if _evacuated_crew == _total_crew: _door.open()
 
 func _exit_tree():
 	Global._node_creation_parent = null
+
+func _start_win_timer():
+	_win_timer.start()
+	pass
+
+func _win():
+	print("You win")
+
+func _lose():
+	pass
