@@ -5,8 +5,8 @@
 [ext_resource path="res://Sprites/Enemies/enemy_slasher.png" type="Texture" id=3]
 
 [sub_resource type="CapsuleShape2D" id=7]
-radius = 4.0
-height = 2.0
+radius = 2.0
+height = 5.0
 
 [sub_resource type="CircleShape2D" id=8]
 radius = 9.0

@@ -77,9 +77,11 @@ func _fix_hull_arbitrary(fix):
 	Global._UI._set_hull_integrity(_hull_integrity)
 
 func _evacuate():
-	_evacuated_crew += 1
+	var _evac = rng.randi_range(0, 10)
+	if _evac > _total_crew-_evacuated_crew: _evac = _total_crew-_evacuated_crew
+	_evacuated_crew += _evac
 	Global._UI._set_evacuated_crew(_evacuated_crew)
-	_evacuation_timer.start(_evacuation_time)
+	_evacuation_timer.start(_evacuation_time*_evac)
 
 func _exit_tree():
 	Global._node_creation_parent = null
