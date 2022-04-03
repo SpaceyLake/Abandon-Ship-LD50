@@ -167,14 +167,14 @@ position = Vector2( 216, 280 )
 _door_path = NodePath("../Door9")
 
 [node name="Door9CP2" parent="." instance=ExtResource( 9 )]
-position = Vector2( 88, 344 )
+position = Vector2( 200, 320 )
 _door_path = NodePath("../Door9")
 
 [node name="Door9" parent="." instance=ExtResource( 5 )]
 position = Vector2( 224, 288 )
 
 [node name="Door10CP1" parent="." instance=ExtResource( 9 )]
-position = Vector2( 88, 392 )
+position = Vector2( 280, 424 )
 _door_path = NodePath("../Door10")
 
 [node name="Door10CP2" parent="." instance=ExtResource( 9 )]
@@ -344,9 +344,6 @@ position = Vector2( 152, 440 )
 [node name="WeaponRack8" parent="." instance=ExtResource( 4 )]
 position = Vector2( 88, 376 )
 
-[node name="WeaponRack9" parent="." instance=ExtResource( 4 )]
-position = Vector2( 408, 200 )
-
 [node name="HazardSpawner2" parent="." instance=ExtResource( 2 )]
 position = Vector2( 584, 600 )
 
@@ -444,7 +441,7 @@ position = Vector2( 664, 296 )
 position = Vector2( 568, 264 )
 
 [node name="HazardSpawner17" parent="." instance=ExtResource( 2 )]
-position = Vector2( 664, 200 )
+position = Vector2( 648, 200 )
 
 [node name="HazardSpawner18" parent="." instance=ExtResource( 2 )]
 position = Vector2( 744, 184 )
@@ -453,7 +450,7 @@ position = Vector2( 744, 184 )
 position = Vector2( 776, 248 )
 
 [node name="HazardSpawner26" parent="." instance=ExtResource( 2 )]
-position = Vector2( 744, 296 )
+position = Vector2( 744, 280 )
 
 [node name="HazardSpawner19" parent="." instance=ExtResource( 2 )]
 position = Vector2( 424, 360 )
@@ -465,7 +462,7 @@ position = Vector2( 600, 384 )
 position = Vector2( 712, 360 )
 
 [node name="HazardSpawner22" parent="." instance=ExtResource( 2 )]
-position = Vector2( 104, 376 )
+position = Vector2( 136, 392 )
 
 [node name="HazardSpawner33" parent="." instance=ExtResource( 2 )]
 position = Vector2( 184, 344 )

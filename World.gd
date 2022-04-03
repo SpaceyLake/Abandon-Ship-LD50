@@ -3,7 +3,7 @@ extends Node2D
 export var _max_hull_integrity : int = 100
 export var _max_oxygen_level : int = 100
 export var _total_crew : int = 100
-export var _evacuation_time : float = 2
+export var _evacuation_time : float = 6
 export var _hazard_spawn_time : float = 10
 export var _hazard_time_offset : float = 5
 export var _oxygen_regen_time : float = 2
@@ -19,15 +19,18 @@ var _active_hazards : Array = []
 var _rng = RandomNumberGenerator.new()
 export(Array, NodePath) var _door_path
 onready var _door = []
+export var _first_hazard_time : float = 0.5
 export(Array, NodePath) var _escape_pod_control_path
-onready var _escape_pods = [get_node(_escape_pod_control_path[0]), get_node(_escape_pod_control_path[1])]
+onready var _escape_pods = []
+var _won : bool = false
 
 func _ready():
+	randomize()
 	_rng.randomize()
 	Global._node_creation_parent = self
 	_hull_integrity = _max_hull_integrity
 	_oxygen_level = _max_oxygen_level
-	_evacuated_crew = 98
+	_evacuated_crew = 0
 	Global._UI._set_max_oxygen(_max_oxygen_level)
 	Global._UI._set_oxygen_level(_oxygen_level)
 	Global._UI._set_max_hull(_max_hull_integrity)
@@ -54,54 +57,65 @@ func _ready():
 		if child.is_in_group("Hazard"):
 			_possible_hazards.append(child)
 			child.connect("_hazard_fixed", self, "_hazard_fixed", [child])
-	_possible_hazards.shuffle()
-	_possible_hazards.shuffle()
-	_possible_hazards.shuffle()
-	_hazard_timer.start(_hazard_spawn_time + _rng.randf_range(0, _hazard_time_offset))
+	for n in _rng.randi_range(0, _possible_hazards.size() * _possible_hazards.size()):
+		_possible_hazards.shuffle()
+	_hazard_timer.start(_first_hazard_time)
 
 func _spawn_hazard():
-	if _possible_hazards.size() > 0:
-		_possible_hazards.pop_front()._spawn_hazard()
-		_hazard_timer.start(_hazard_spawn_time + _rng.randf_range(0, _hazard_time_offset))
+	if not _won:
+		if _possible_hazards.size() > 0:
+			for n in _possible_hazards.size() - 1:
+				if _possible_hazards[n].global_position.distance_to(Global._player.global_position) > 340:
+					_possible_hazards.pop_at(n)._spawn_hazard()
+					break
+			_hazard_timer.start(_hazard_spawn_time + _rng.randf_range(0, _hazard_time_offset))
 
 func _hazard_fixed(hazard):
-	if _possible_hazards.size() == 0:
-		_hazard_timer.start(_hazard_spawn_time + _rng.randf_range(0, _hazard_time_offset))
-	_possible_hazards.append(hazard)
-	_possible_hazards.shuffle()
+	if not _won:
+		if _possible_hazards.size() == 0:
+			_hazard_timer.start(_hazard_spawn_time + _rng.randf_range(0, _hazard_time_offset))
+		_possible_hazards.append(hazard)
+		_possible_hazards.shuffle()
 
 func _regen_oxygen():
-	if _oxygen_level < _max_oxygen_level:
-		_oxygen_level += 1
-		Global._UI._set_oxygen_level(_oxygen_level)
+	if not _won:
+		if _oxygen_level < _max_oxygen_level:
+			_oxygen_level += 1
+			Global._UI._set_oxygen_level(_oxygen_level)
 
 func _drain_oxygen():
-	_oxygen_level -= 1
-	Global._UI._set_oxygen_level(_oxygen_level)
-	if _oxygen_level == 0: _lose()
+	if not _won:
+		_oxygen_level -= 1
+		Global._UI._set_oxygen_level(_oxygen_level)
+		if _oxygen_level == 0: _lose()
 
 func _damage_hull():
-	_hull_integrity -= 1
-	Global._UI._set_hull_integrity(_hull_integrity)
-	if _hull_integrity == 0: _lose()
+	if not _won:
+		_hull_integrity -= 1
+		Global._UI._set_hull_integrity(_hull_integrity)
+		if _hull_integrity == 0: _lose()
 
 func _damage_hull_arbitrary(damage):
-	_hull_integrity -= damage
-	Global._UI._set_hull_integrity(_hull_integrity)
+	if not _won:
+		_hull_integrity -= damage
+		Global._UI._set_hull_integrity(_hull_integrity)
 
 func _fix_hull_arbitrary(fix):
-	_hull_integrity += fix
-	Global._UI._set_hull_integrity(_hull_integrity)
+	if not _won:
+		_hull_integrity += fix
+		Global._UI._set_hull_integrity(_hull_integrity)
 
 func _evacuate():
-	var _evac = _rng.randi_range(0, 10)
-	if _evac > _total_crew-_evacuated_crew: _evac = _total_crew-_evacuated_crew
-	_evacuated_crew += _evac
-	Global._UI._set_evacuated_crew(_evacuated_crew)
-	_evacuation_timer.start(_evacuation_time*_evac)
-	if _evacuated_crew == _total_crew: 
-		for door in _door:
-			door.open()
+	if not _won:
+		var _evac = _rng.randi_range(0, 10)
+		if _evac > _total_crew-_evacuated_crew: _evac = _total_crew-_evacuated_crew
+		_evacuated_crew += _evac
+		Global._UI._set_evacuated_crew(_evacuated_crew)
+		_evacuation_timer.start(_evacuation_time*_evac)
+		if _evacuated_crew == _total_crew: 
+			_won = true
+			for door in _door:
+				door.open()
 
 func _exit_tree():
 	Global._node_creation_parent = null
