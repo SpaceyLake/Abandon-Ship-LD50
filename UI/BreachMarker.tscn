@@ -3,4 +3,4 @@
 [node name="ColorRect" type="ColorRect"]
 margin_right = 1.0
 margin_bottom = 1.0
-color = Color( 0.427451, 0.427451, 0.427451, 1 )
+color = Color( 0.0588235, 0.054902, 0.0901961, 1 )

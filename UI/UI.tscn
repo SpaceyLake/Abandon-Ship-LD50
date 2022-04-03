@@ -171,6 +171,9 @@ _enemy_spawner_marker_resource = ExtResource( 17 )
 _breach_marker_resource = ExtResource( 18 )
 _escape_pod_control_marker_resource = ExtResource( 19 )
 _heal_station_marker_resource = ExtResource( 20 )
+_background_color = Color( 0, 0, 0, 0 )
+_wall_color = Color( 0.247059, 0.780392, 0.470588, 1 )
+_floor_color = Color( 0, 0.388235, 0.360784, 1 )
 
 [node name="Minimap" type="TextureRect" parent="Minimap"]
 margin_right = 40.0

@@ -3,4 +3,4 @@
 [node name="EnemySpawnerMarker" type="ColorRect"]
 margin_right = 2.0
 margin_bottom = 2.0
-color = Color( 0.454902, 0, 0.764706, 1 )
+color = Color( 0.392157, 0.27451, 0.552941, 1 )

@@ -3,3 +3,4 @@
 [node name="WeaponRackMarker" type="ColorRect"]
 margin_right = 1.0
 margin_bottom = 1.0
+color = Color( 0.882353, 0.32549, 0.290196, 1 )
