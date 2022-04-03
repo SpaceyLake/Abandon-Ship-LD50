@@ -9,6 +9,8 @@ export var _weapon_rack_marker_resource : PackedScene
 export var _control_panel_marker_resource : PackedScene
 export var _enemy_spawner_marker_resource : PackedScene
 export var _breach_marker_resource : PackedScene
+export var _escape_pod_control_marker_resource : PackedScene
+export var _heal_station_marker_resource : PackedScene
 export var _background_color : Color = Color.black
 export var _wall_color : Color = Color.purple
 export var _floor_color : Color = Color.red
@@ -44,6 +46,9 @@ func _ready():
 	_player_marker = Global.instance_control_node(_player_marker_resource, rect_global_position + (player.global_position/16).floor(), self)
 	player.connect("_sync_map", self, "_sync_player")
 	
+	var escape_pod_control = world.get_node("EscapePodControl")
+	Global.instance_control_node(_escape_pod_control_marker_resource, rect_global_position + (escape_pod_control.global_position/16).floor(), self)
+	
 	var world_objects = world.get_children()
 	for object in world_objects:
 		if object.is_in_group("HDoors"):
@@ -61,6 +66,9 @@ func _ready():
 			object.connect("_sync_map", self, "_sync_hazard", [_hazard_markers.size(), object.global_position])
 			_hazard_markers.append(null)
 			_hazard_types.append(-1)
+		if object.is_in_group("HealStation"):
+			print("HealStation Found")
+			Global.instance_control_node(_heal_station_marker_resource, rect_global_position + (object.global_position/16).floor(), self)
 
 func _sync_player(_position):
 	_player_marker.rect_global_position = rect_global_position + (_position/16).floor() 
