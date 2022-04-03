@@ -22,5 +22,4 @@ func _physics_process(delta):
 func _collide(body):
 	if body.is_in_group("Enemy"):
 		body._bullet_hit(_damage, _knockback, _direction, _spawn_position)
-	if not body.is_in_group("ActiveHazard"):
-		queue_free()
+	queue_free()
