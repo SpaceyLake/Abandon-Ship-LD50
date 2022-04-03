@@ -86,10 +86,10 @@ _door_path = NodePath("../VDoor2")
 position = Vector2( 168, 152 )
 _door_path = NodePath("../VDoor2")
 
+[node name="WeaponRack" parent="." instance=ExtResource( 4 )]
+position = Vector2( 232, 24 )
+
 [node name="UI" parent="." instance=ExtResource( 7 )]
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
 position = Vector2( 160, 48 )
-
-[node name="StaticBody2D" parent="." instance=ExtResource( 4 )]
-position = Vector2( 24, 24 )

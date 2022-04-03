@@ -1,0 +1,5 @@
+[gd_scene format=2]
+
+[node name="ControlPanelMarker" type="ColorRect"]
+margin_right = 1.0
+margin_bottom = 1.0
