@@ -5,6 +5,7 @@ var _menu_length = 0
 var _menu_current = 0
 export(NodePath) var _selector_path
 onready var _selector = get_node(_selector_path)
+export(Array, String) var _scenes
 
 func _ready():
 	_menu_items = $Background/Menu.get_children()
@@ -15,12 +16,8 @@ func _process(delta):
 		_menu_current += 1
 		if _menu_current >= _menu_length: _menu_current -= _menu_length
 	if Input.is_action_just_pressed("move_up") or Input.is_action_just_pressed("fire_up"):
-		_menu_current += 1
-		if _menu_current >= _menu_length: _menu_current -= _menu_length
+		_menu_current -= 1
+		if _menu_current < 0: _menu_current += _menu_length
 	_selector.rect_position = _menu_items[_menu_current].rect_position
 	if Input.is_action_just_pressed("interact"):
-		match _menu_current:
-			0:
-				get_tree().change_scene("res://TestWorld.tscn")
-			1:
-				pass
+		get_tree().change_scene(_scenes[_menu_current])
