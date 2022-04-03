@@ -64,7 +64,6 @@ func _ready():
 			_hazard_markers.append(null)
 			_hazard_types.append(-1)
 		if object.is_in_group("HealStation"):
-			print("HealStation Found")
 			Global.instance_control_node(_heal_station_marker_resource, rect_global_position + (object.global_position/16).floor(), self)
 		if object.is_in_group("EscapePodControl"):
 			Global.instance_control_node(_escape_pod_control_marker_resource, rect_global_position + (object.global_position/16).floor(), self)
