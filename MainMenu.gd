@@ -11,7 +11,7 @@ func _ready():
 	_menu_items = $Background/Menu.get_children()
 	_menu_length = _menu_items.size()
 
-func _process(delta):
+func _process(_delta):
 	if Input.is_action_just_pressed("move_down") or Input.is_action_just_pressed("fire_down"):
 		_menu_current += 1
 		if _menu_current >= _menu_length: _menu_current -= _menu_length
