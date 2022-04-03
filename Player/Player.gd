@@ -13,10 +13,11 @@ export var _velocity_decrease = 0.85
 export var _movement_speed : int = 300
 export var _minimum_velocity : float = 0.01
 #export(Array, PackedScene) var weapons
-export var _weapon : PackedScene
+export(Array, PackedScene) var _weapons_resources
 export var _touch_length : float = 6
 onready var _touch : RayCast2D = $Touch
-onready var _current_weapon = null
+var _weapons : Array = []
+var _weapon_index : int = 0
 
 onready var _sprite_default = preload("res://Sprites/Player/player_walk.png")
 onready var _sprite_holding = preload("res://Sprites/Player/player_walk_armless.png")
@@ -27,12 +28,15 @@ func _ready():
 	connect("health_changed", Global._UI, "_set_healthbar")
 	emit_signal("max_health_changed", _max_health)
 	emit_signal("health_changed", _health)
-	_current_weapon = Global.instance_node(_weapon, $WeaponHoldPoint.global_position, $WeaponHoldPoint)
+	for n in _weapons_resources.size():
+		_weapons.append(Global.instance_node(_weapons_resources[n], $WeaponHoldPoint.global_position, $WeaponHoldPoint))
+		if n != _weapon_index:
+			_weapons[n].visible = false
 	
-	if _current_weapon == null:
-		$Sprite.set_texture(_sprite_default)
-	else:
-		$Sprite.set_texture(_sprite_holding)
+#	if _current_weapon == null:
+#		$Sprite.set_texture(_sprite_default)
+#	else:
+	$Sprite.set_texture(_sprite_holding)
 
 func _physics_process(delta):
 	_input = Vector2(Input.get_action_strength("move_right") - Input.get_action_strength("move_left"),
@@ -66,22 +70,22 @@ func _physics_process(delta):
 	#Animation
 	if _input == Vector2.ZERO:
 		$AnimationPlayer.play("Idle")
-		_current_weapon._set_animation(true, Vector2(_fire_input.x +_input.x*0.5, _fire_input.y))
+		_weapons[_weapon_index]._set_animation(true, Vector2(_fire_input.x +_input.x*0.5, _fire_input.y))
 	else:
 		$AnimationPlayer.play("Walk")
-		_current_weapon._set_animation(false, Vector2(_fire_input.x +_input.x*0.5, _fire_input.y))
+		_weapons[_weapon_index]._set_animation(false, Vector2(_fire_input.x +_input.x*0.5, _fire_input.y))
 		
 	if _fire_input.x != 0:
 		$Sprite.flip_h = _fire_input.x < 0
 		$WeaponHoldPoint.position.x = 3 * -sign(_fire_input.x)
-		_current_weapon._set_right(_fire_input.x > 0)
+		_weapons[_weapon_index]._set_right(_fire_input.x > 0)
 	elif _input.x != 0:
 		$Sprite.flip_h = _input.x < 0
 		$WeaponHoldPoint.position.x = 3 * -sign(_input.x)
-		_current_weapon._set_right(_input.x > 0)
+		_weapons[_weapon_index]._set_right(_input.x > 0)
 	
 	if _fire_input != Vector2.ZERO:
-		_current_weapon._fire(_fire_input)
+		_weapons[_weapon_index]._fire(_fire_input)
 
 func _exit_tree():
 	Global._player = null
@@ -91,3 +95,11 @@ func _attacked(damage, _knockback):
 	_health -= damage
 	emit_signal("health_changed", _health)
 	if _health <= 0: get_tree().reload_current_scene()
+
+func _swap_weapon():
+	_weapons[_weapon_index].visible = false
+	if _weapon_index < _weapons.size() - 1:
+		_weapon_index += 1
+	else:
+		_weapon_index = 0
+	_weapons[_weapon_index].visible = true
