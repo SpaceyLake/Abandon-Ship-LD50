@@ -5,8 +5,8 @@
 [ext_resource path="res://Sprites/Enemies/enemy_slasher.png" type="Texture" id=3]
 
 [sub_resource type="CapsuleShape2D" id=7]
-radius = 2.0
-height = 5.0
+radius = 3.0
+height = 4.0
 
 [sub_resource type="CircleShape2D" id=8]
 radius = 9.0
@@ -109,7 +109,7 @@ rotation = 1.5708
 shape = SubResource( 7 )
 
 [node name="Sprite" type="Sprite" parent="."]
-position = Vector2( 0, -6 )
+position = Vector2( 0, -5 )
 texture = ExtResource( 3 )
 hframes = 8
 vframes = 2
@@ -152,3 +152,5 @@ monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InfluenceArea"]
 shape = SubResource( 9 )
+
+[node name="RoamTimer" type="Timer" parent="."]
