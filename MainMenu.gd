@@ -21,3 +21,4 @@ func _process(_delta):
 	_selector.rect_position = _menu_items[_menu_current].rect_position
 	if Input.is_action_just_pressed("interact"):
 		get_tree().change_scene(_scenes[_menu_current])
+	if Input.is_action_just_pressed("escape"): get_tree().quit()
