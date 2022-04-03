@@ -15,9 +15,10 @@ onready var _hazard_timer : Timer = $HazardTimer
 onready var _oxygen_regen_timer : Timer = $OxygenRegenTimer
 var _possible_hazards : Array = []
 var _active_hazards : Array = []
-var rng = RandomNumberGenerator.new()
+var _rng = RandomNumberGenerator.new()
 
 func _ready():
+	_rng.randomize()
 	Global._node_creation_parent = self
 	_hull_integrity = _max_hull_integrity
 	_oxygen_level = _max_oxygen_level
@@ -42,16 +43,16 @@ func _ready():
 			_possible_hazards.append(child)
 			child.connect("_hazard_fixed", self, "_hazard_fixed", [child])
 	_possible_hazards.shuffle()
-	_hazard_timer.start(_hazard_spawn_time + rng.randf_range(0, _hazard_time_offset))
+	_hazard_timer.start(_hazard_spawn_time + _rng.randf_range(0, _hazard_time_offset))
 
 func _spawn_hazard():
 	if _possible_hazards.size() > 0:
 		_possible_hazards.pop_front()._spawn_hazard()
-		_hazard_timer.start(_hazard_spawn_time + rng.randf_range(0, _hazard_time_offset))
+		_hazard_timer.start(_hazard_spawn_time + _rng.randf_range(0, _hazard_time_offset))
 
 func _hazard_fixed(hazard):
 	if _possible_hazards.size() == 0:
-		_hazard_timer.start(_hazard_spawn_time + rng.randf_range(0, _hazard_time_offset))
+		_hazard_timer.start(_hazard_spawn_time + _rng.randf_range(0, _hazard_time_offset))
 	_possible_hazards.append(hazard)
 	_possible_hazards.shuffle()
 
@@ -77,7 +78,7 @@ func _fix_hull_arbitrary(fix):
 	Global._UI._set_hull_integrity(_hull_integrity)
 
 func _evacuate():
-	var _evac = rng.randi_range(0, 10)
+	var _evac = _rng.randi_range(0, 10)
 	if _evac > _total_crew-_evacuated_crew: _evac = _total_crew-_evacuated_crew
 	_evacuated_crew += _evac
 	Global._UI._set_evacuated_crew(_evacuated_crew)

@@ -23,8 +23,11 @@ func _ready():
 func _set_spawner(spawner):
 	_spawner = spawner
 
-func _bullet_hit(damage, _knockback, _bullet_velocity, bullet_origin):
-	_health -= damage
+func _bullet_hit(_damage, _knockback, _bullet_velocity, _bullet_origin):
+	pass
+
+func _foam_hit(repair, _knockback, _bullet_velocity, _bullet_origin):
+	_health -= repair
 	if _health <= 0:
 		_spawner._hazard_fixed()
 		get_parent()._fix_hull_arbitrary(3)

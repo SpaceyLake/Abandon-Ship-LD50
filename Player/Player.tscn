@@ -1,8 +1,10 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://icon.png" type="Texture" id=2]
 [ext_resource path="res://Sprites/Player/player_walk.png" type="Texture" id=3]
+[ext_resource path="res://Weapons/Weapon.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Weapons/RepairGun.tscn" type="PackedScene" id=5]
 
 [sub_resource type="CapsuleShape2D" id=5]
 radius = 2.0
@@ -60,6 +62,7 @@ z_index = 70
 collision_layer = 2
 collision_mask = 21
 script = ExtResource( 1 )
+_weapons_resources = [ ExtResource( 4 ), ExtResource( 5 ) ]
 
 [node name="Hitbox" type="CollisionShape2D" parent="."]
 position = Vector2( -0.5, 0 )

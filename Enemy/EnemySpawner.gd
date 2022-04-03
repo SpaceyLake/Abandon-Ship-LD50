@@ -17,6 +17,7 @@ var _rng = RandomNumberGenerator.new()
 var _spawner = null
 
 func _ready():
+	_rng.randomize()
 	add_to_group("Enemy", true)
 	_spawn_timer.connect("timeout", self, "_spawn")
 	_hull_damage_timer.wait_time = _hull_damage_time
@@ -44,6 +45,9 @@ func _bullet_hit(damage, _knockback, _bullet_velocity, bullet_origin):
 		var breach = Global.instance_node(_hullbreach, global_position, Global._node_creation_parent)
 		breach._set_spawner(_spawner)
 		queue_free()
+
+func _foam_hit(_repair, _knockback, _bullet_velocity, _bullet_origin):
+	pass
 
 func _influence(target_position):
 	var bodies = _influence_area.get_overlapping_bodies()

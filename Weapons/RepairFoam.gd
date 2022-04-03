@@ -5,7 +5,7 @@ var _direction : Vector2 = Vector2.ZERO
 export var _speed : float = 100
 export var _speed_decay : float = 100
 export var _knockback : float = 100
-export var _damage : float = 0
+export var _repair_rate : float = 1
 var _spawn_position : Vector2 = Vector2.ZERO
 
 func _ready():
@@ -25,5 +25,5 @@ func _physics_process(delta):
 
 func _collide(body):
 	if body.is_in_group("Enemy"):
-		body._bullet_hit(_damage, _knockback, _direction, _spawn_position)
+		body._foam_hit(_repair_rate, _knockback, _direction, _spawn_position)
 	queue_free()
