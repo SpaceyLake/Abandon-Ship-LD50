@@ -105,7 +105,7 @@ func _attacked(damage, _knockback):
 	_velocity += _knockback
 	_health -= damage
 	emit_signal("health_changed", _health)
-	if _health <= 0: get_tree().reload_current_scene()
+	if _health <= 0: get_tree().change_scene("res://EndLose.tscn")
 
 func _swap_weapon():
 	_weapons[_weapon_index].visible = false
