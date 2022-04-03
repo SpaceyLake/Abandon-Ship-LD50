@@ -17,7 +17,8 @@ var _spawner = null
 
 func _ready():
 	_rng.randomize()
-	add_to_group("Enemy", true)
+	add_to_group("Enemy")
+	add_to_group("ActiveHazard")
 	_spawn_timer.connect("timeout", self, "_spawn")
 	_hull_damage_timer.wait_time = _hull_damage_time
 	_hull_damage_timer.one_shot = false
