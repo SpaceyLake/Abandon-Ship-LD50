@@ -1,6 +1,7 @@
 extends StaticBody2D
 
-export var _enemy : PackedScene
+export var _enemy_common : PackedScene
+export var _enemy_rare : PackedScene
 export var _spawn_time : float = 2
 export var _hull_damage_time : float = 3
 export var _time_offset : float = 1
@@ -29,7 +30,11 @@ func _ready():
 
 func _spawn():
 	if _enemies_spawned < _max_spawned:
-		var spawned_enemy = Global.instance_node(_enemy, global_position, Global._node_creation_parent)
+		var spawned_enemy = null
+		if _rng.randi_range(0, 3) == 0:
+			spawned_enemy = Global.instance_node(_enemy_rare, global_position, Global._node_creation_parent)
+		else:
+			spawned_enemy = Global.instance_node(_enemy_common, global_position, Global._node_creation_parent)
 		spawned_enemy._set_target_position(global_position + Vector2(sign(randi() % 2 - 0.5) * (_minimum_target.x + _rng.randf_range(0, _target_offset.x)), sign(randi() % 2 - 0.5) * (_minimum_target.y + _rng.randf_range(0, _target_offset.y))))
 		spawned_enemy.connect("_enemy_killed", self, "_enemy_killed")
 		_enemies_spawned += 1
