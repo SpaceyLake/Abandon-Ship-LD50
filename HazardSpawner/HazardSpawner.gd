@@ -29,5 +29,5 @@ func _hazard_fixed():
 func _spawn_breach():
 	_hazard_type = 1
 	emit_signal("_sync_map", true, _hazard_type)
-	var breach = Global.instance_node(hazards[_hazard_type], global_position, Global._node_creation_parent)
+	var breach = Global.instance_node_deferred(hazards[_hazard_type], global_position, Global._node_creation_parent)
 	breach._set_spawner(self)
