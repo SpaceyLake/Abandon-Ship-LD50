@@ -11,3 +11,6 @@ func _interact():
 		_door.close()
 	else:
 		_door.open()
+
+func _stop_interaction():
+	pass
