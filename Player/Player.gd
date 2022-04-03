@@ -18,6 +18,7 @@ export var _touch_length : float = 6
 onready var _touch : RayCast2D = $Touch
 var _weapons : Array = []
 var _weapon_index : int = 0
+var _interacting_object : Node2D = null
 
 onready var _sprite_default = preload("res://Sprites/Player/player_walk.png")
 onready var _sprite_holding = preload("res://Sprites/Player/player_walk_armless.png")
@@ -52,9 +53,17 @@ func _physics_process(delta):
 				_touch.cast_to = Vector2.UP * _touch_length
 			else:
 				_touch.cast_to = Vector2.DOWN * _touch_length
+	
 	if Input.is_action_just_pressed("interact"):
 		if _touch.get_collider() != null:
 			_touch.get_collider()._interact()
+			_interacting_object = _touch.get_collider()
+
+	if _interacting_object != null:
+		if Input.is_action_just_released("interact") or _touch.get_collider() != _interacting_object:
+			_interacting_object._stop_interaction()
+			_interacting_object = null
+	
 	_velocity += _input * delta * _movement_speed
 	_velocity *= _velocity_decrease
 	if abs(_velocity.x) < _minimum_velocity: _velocity = Vector2(0, _velocity.y)
@@ -103,3 +112,8 @@ func _swap_weapon():
 	else:
 		_weapon_index = 0
 	_weapons[_weapon_index].visible = true
+
+func _heal():
+	if _health < _max_health:
+		_health += 1
+	emit_signal("health_changed", _health)
