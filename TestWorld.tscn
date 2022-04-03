@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://HazardSpawner/HazardSpawner.tscn" type="PackedScene" id=2]
@@ -10,9 +10,16 @@
 [ext_resource path="res://Doors/VDoor.tscn" type="PackedScene" id=8]
 [ext_resource path="res://ControlPanel/ControlPanel.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Tilesets/floor.tres" type="TileSet" id=10]
+[ext_resource path="res://EscapePodControl/EscapePodControl.tscn" type="PackedScene" id=11]
+[ext_resource path="res://HealStation/HealStation.tscn" type="PackedScene" id=12]
 
 [node name="TestWorld" type="Node2D"]
 script = ExtResource( 6 )
+_door_path = NodePath("HDoor3")
+
+[node name="WinTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
 
 [node name="HazardTimer" type="Timer" parent="."]
 one_shot = true
@@ -88,6 +95,16 @@ _door_path = NodePath("../VDoor2")
 
 [node name="WeaponRack" parent="." instance=ExtResource( 4 )]
 position = Vector2( 232, 24 )
+
+[node name="HDoor3" parent="." instance=ExtResource( 5 )]
+position = Vector2( 120, 32 )
+
+[node name="EscapePodControl" parent="." instance=ExtResource( 11 )]
+position = Vector2( 136, 24 )
+_door_path = NodePath("../HDoor3")
+
+[node name="HealStation" parent="." instance=ExtResource( 12 )]
+position = Vector2( 232, 72 )
 
 [node name="UI" parent="." instance=ExtResource( 7 )]
 
