@@ -464,14 +464,17 @@ position = Vector2( 712, 360 )
 [node name="HazardSpawner22" parent="." instance=ExtResource( 2 )]
 position = Vector2( 136, 392 )
 
-[node name="HazardSpawner33" parent="." instance=ExtResource( 2 )]
-position = Vector2( 184, 344 )
+[node name="HazardSpawner45" parent="." instance=ExtResource( 2 )]
+position = Vector2( 152, 344 )
+
+[node name="HazardSpawner46" parent="." instance=ExtResource( 2 )]
+position = Vector2( 200, 376 )
+
+[node name="HazardSpawner47" parent="." instance=ExtResource( 2 )]
+position = Vector2( 312, 312 )
 
 [node name="HazardSpawner34" parent="." instance=ExtResource( 2 )]
 position = Vector2( 248, 392 )
-
-[node name="HazardSpawner23" parent="." instance=ExtResource( 2 )]
-position = Vector2( 264, 344 )
 
 [node name="UI" parent="." instance=ExtResource( 7 )]
 
