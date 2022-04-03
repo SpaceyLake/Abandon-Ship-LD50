@@ -9,8 +9,8 @@ var _health = 10
 var _input : Vector2 = Vector2.ZERO
 var _fire_input : Vector2 = Vector2.ZERO
 var _velocity : Vector2 = Vector2.ZERO
-export var _velocity_decrease = 0.85
-export var _movement_speed : int = 300
+export var _velocity_decrease = 0.7
+export var _movement_speed : int = 300*7
 export var _minimum_velocity : float = 0.01
 #export(Array, PackedScene) var weapons
 export(Array, PackedScene) var _weapons_resources
@@ -58,13 +58,15 @@ func _physics_process(delta):
 		if _touch.get_collider() != null:
 			_touch.get_collider()._interact()
 			_interacting_object = _touch.get_collider()
-
+	
 	if _interacting_object != null:
 		if Input.is_action_just_released("interact") or _touch.get_collider() != _interacting_object:
 			_interacting_object._stop_interaction()
 			_interacting_object = null
 	
 	_velocity += _input * delta * _movement_speed
+#	if _input == Vector2.ZERO:
+#		_velocity = Vector2.ZERO
 	_velocity *= _velocity_decrease
 	if abs(_velocity.x) < _minimum_velocity: _velocity = Vector2(0, _velocity.y)
 	if abs(_velocity.y) < _minimum_velocity: _velocity = Vector2(_velocity.x, 0)
