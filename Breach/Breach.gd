@@ -20,7 +20,7 @@ func _ready():
 func _set_spawner(spawner):
 	_spawner = spawner
 
-func _bullet_hit(damage, _knockback, _bullet_velocity, bullet_origin):
+func _bullet_hit(damage, _knockback, _bullet_velocity, _bullet_origin):
 	_health -= damage
 	if _health <= 0:
 		_spawner._hazard_fixed()
