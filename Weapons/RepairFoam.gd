@@ -24,6 +24,6 @@ func _physics_process(delta):
 		queue_free()
 
 func _collide(body):
-	if body.is_in_group("Enemy"):
+	if body.is_in_group("Enemy") or body.is_in_group("ActiveHazard"):
 		body._foam_hit(_repair_rate, _knockback, _direction, _spawn_position)
 	queue_free()
