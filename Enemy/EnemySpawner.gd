@@ -3,7 +3,7 @@ extends StaticBody2D
 export var _enemy_common : PackedScene
 export var _enemy_rare : PackedScene
 export var _spawn_time : float = 2
-export var _hull_damage_time : float = 3
+export var _hull_damage_time : float = 3.2
 export var _time_offset : float = 1
 export var _health : int = 5
 export var _minimum_target : Vector2 = Vector2.ONE * 16
