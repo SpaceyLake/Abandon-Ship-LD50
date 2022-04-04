@@ -108,7 +108,7 @@ func _fix_hull_arbitrary(fix):
 
 func _evacuate():
 	if not _cleared:
-		var _evac = _rng.randi_range(0, 10)
+		var _evac = _rng.randi_range(0, 6)
 		if _evac > _total_crew-_evacuated_crew: _evac = _total_crew-_evacuated_crew
 		_evacuated_crew += _evac
 		Global._UI._set_evacuated_crew(_evacuated_crew)
