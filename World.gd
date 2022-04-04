@@ -3,10 +3,10 @@ extends Node2D
 export var _max_hull_integrity : int = 100
 export var _max_oxygen_level : int = 100
 export var _total_crew : int = 100
-export var _evacuation_time : float = 3
-export var _hazard_spawn_time : float = 11
+export var _evacuation_time : float = 2
+export var _hazard_spawn_time : float = 12
 export var _hazard_time_offset : float = 2
-export var _oxygen_regen_time : float = 1.5
+export var _oxygen_regen_time : float = 1
 var _hull_integrity : int
 var _oxygen_level : int
 var _evacuated_crew : int

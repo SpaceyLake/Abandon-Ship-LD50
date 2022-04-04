@@ -52,7 +52,7 @@ _enemy_common = ExtResource( 3 )
 _enemy_rare = ExtResource( 4 )
 _hull_damage_time = 8.0
 _health = 10
-_max_spawned = 6
+_max_spawned = 5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, 1 )
